@@ -3,7 +3,9 @@
 
     .navbar-brand {
         display: flex;
-        align-items: center;
+        //align-items: center;
+        //align-content: center;
+        //flex-wrap: wrap;
 
         img {
             margin-right: 10px;
@@ -11,6 +13,8 @@
 
         span {
             font-size: 35px;
+            text-align: center;
+            //margin: 10px;
         }
     }
 
@@ -18,12 +22,28 @@
         font-size: 18px;
 
         &.active {
-            color: #46c373;
+            color: #533263;
         }
 
         &:hover {
-            color: #46c373;
-            background-color: #a5dc6933;
+            color: #533263;
+            background-color: #53326333;
         }
     }
+
+    .navbar-end {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    width: 20vw;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+
+    border-right: 1px solid #ddd;
+
 }

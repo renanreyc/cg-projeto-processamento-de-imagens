@@ -1,9 +1,7 @@
 .app-container {
     min-height: 100vh;
-    overflow: hidden;
-    display: block;
-    position: relative;
-    padding-bottom: 85px;
+    display: flex;
+    flex-direction: row;
 
     .divider {
         margin-bottom: 0px;
@@ -11,15 +9,6 @@
 
     .app-router {
         margin: 30px 0px;
-    }
-
-    footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        padding: 30px;
-        color: white;
-        background-color: #46c373;
     }
 }
 
