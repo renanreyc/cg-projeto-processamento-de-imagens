@@ -3,7 +3,7 @@ import { Filter, FilterTypes } from '../../types/filter';
 import { Mascara, MascaraType } from '../../types/maks';
 import { PgmFile } from '../../types/pgm-image';
 import { FilterInfo } from '../../utils/filter.decorator';
-import { BaseFilterService } from '../base-filter.service';
+import { BaseFilter } from '../base-filter.service';
 import { ImageHelperService } from '../image-helper.service';
 
 @FilterInfo({
@@ -12,7 +12,7 @@ import { ImageHelperService } from '../image-helper.service';
 })
 @Injectable({ providedIn: 'root' })
 export class PassaAltoAgucamentoFilter
-    extends BaseFilterService
+    extends BaseFilter
     implements Filter {
 
     private mascara: Mascara = [

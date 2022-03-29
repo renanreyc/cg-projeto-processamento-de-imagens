@@ -1,10 +1,9 @@
-import { Mascara, MascaraType } from './maks';
+import { MascaraType } from './maks';
 import { PgmFile } from './pgm-image';
 
 export interface Filter<T = {}> {
     transform(image: PgmFile, type: MascaraType, options?: T): number[];
 }
-
 
 export enum FilterTypes {
     PassaAltoBordas,

@@ -3,7 +3,7 @@ import { AltoReforcoOptions, Filter, FilterTypes } from '../../types/filter';
 import { Mascara, MascaraType } from '../../types/maks';
 import { PgmFile } from '../../types/pgm-image';
 import { FilterInfo } from '../../utils/filter.decorator';
-import { BaseFilterService } from '../base-filter.service';
+import { BaseFilter } from '../base-filter.service';
 import { ImageHelperService } from '../image-helper.service';
 import { PassaBaixoMediaFilter } from './passa-baixo-media.filter';
 
@@ -12,7 +12,7 @@ import { PassaBaixoMediaFilter } from './passa-baixo-media.filter';
     type: FilterTypes.AltoReforco,
 })
 @Injectable({ providedIn: 'root' })
-export class AltoReforcoFilter extends BaseFilterService implements Filter<AltoReforcoOptions> {
+export class AltoReforcoFilter extends BaseFilter implements Filter<AltoReforcoOptions> {
 
     private mascara: Mascara = [
         -1/9, -1/9, -1/9,

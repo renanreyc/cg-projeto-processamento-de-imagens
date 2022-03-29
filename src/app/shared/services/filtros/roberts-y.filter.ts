@@ -3,7 +3,7 @@ import { Filter, FilterTypes } from '../../types/filter';
 import { Mascara, MascaraType } from '../../types/maks';
 import { PgmFile } from '../../types/pgm-image';
 import { FilterInfo } from '../../utils/filter.decorator';
-import { BaseFilterService } from '../base-filter.service';
+import { BaseFilter } from '../base-filter.service';
 import { ImageHelperService } from '../image-helper.service';
 
 @FilterInfo({
@@ -11,7 +11,7 @@ import { ImageHelperService } from '../image-helper.service';
     type: FilterTypes.RobertsY,
 })
 @Injectable({ providedIn: 'root' })
-export class RobertsYFilter extends BaseFilterService implements Filter {
+export class RobertsYFilter extends BaseFilter implements Filter {
 
     private mascara: Mascara = [
          0, 0,  0,

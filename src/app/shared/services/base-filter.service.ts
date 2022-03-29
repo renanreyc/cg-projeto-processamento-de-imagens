@@ -2,24 +2,6 @@ import { Mascara, MascaraType } from '../types/maks';
 import { PgmFile } from '../types/pgm-image';
 import { ImageHelperService } from './image-helper.service';
 
-// export class Test {
-//     constructor(protected readonly imageHelperService: ImageHelperService) {}
-
-//     protected filterImage(
-//         image: PgmFile,
-//         mascara: Mascara,
-//         type: MascaraType = MascaraType.correlation,
-//         abs = false
-//     ): number[] {
-//         const interpolacao = 127; pegar o valor da médio ou mediana
-//         const newImage = [];
-
-//         //if (type === MascaraType.convolution) mascara = this.convolutionMascara(mascara);
-
-//         for (let i = 0; i < image.length; i++) {
-
-//             let sum = 0;
-
 //             for (let j = 0; j < 9; j++) {
 //                 if(image.pixels[i] >= interpolacao){
 //                     newImage.push(255)
@@ -28,14 +10,9 @@ import { ImageHelperService } from './image-helper.service';
 //                 }
 //                 // salvar no formato pgm
 //             }
-
 //             newImage.push(sum);
-//         }
 
-//         return newImage;
-//     } //play do PPM 
-
-export class BaseFilterService {
+export class BaseFilter {
     constructor(protected readonly imageHelperService: ImageHelperService) {}
 
     protected filterImage(
@@ -46,8 +23,11 @@ export class BaseFilterService {
     ): number[] {
         const newImage = [];
 
-        if (type === MascaraType.convolution) mascara = this.convolutionMascara(mascara);
+        if (type === MascaraType.convolution) {
+            mascara = this.convolutionMascara(mascara);
+        }
 
+            
         for (let i = 0; i < image.length; i++) {
             const vizinhanca = this.getVizinhos(i, image);
             let sum = 0;
@@ -65,6 +45,10 @@ export class BaseFilterService {
 
     protected getVizinhos(i: number, image: PgmFile, zeroCount = true, addCenter = true): Mascara {
 
+        // Para encontrarmos o vizinho superior ou inferior ao pixel
+        // pegamos a posição do pixel array menos a largura da imagem 
+        // e pegamos o resto de i com a largura da imagem para saber se
+        // ela está no inicio ou no fim da linha
         const vizinhos = [];
 
         // Noroeste

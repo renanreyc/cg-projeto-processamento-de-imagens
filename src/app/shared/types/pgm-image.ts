@@ -58,6 +58,8 @@ export class PgmFile {
     }
 
     private static processContent(content: string): PgmFile {
+        // console.log("content")
+        // console.log(content)
         const file = new PgmFile();
         
         // CABEÇALHO

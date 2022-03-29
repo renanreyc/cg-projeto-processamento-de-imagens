@@ -3,7 +3,7 @@ import { Filter, FilterTypes } from '../../types/filter';
 import { Mascara, MascaraType } from '../../types/maks';
 import { PgmFile } from '../../types/pgm-image';
 import { FilterInfo } from '../../utils/filter.decorator';
-import { BaseFilterService } from '../base-filter.service';
+import { BaseFilter } from '../base-filter.service';
 import { ImageHelperService } from '../image-helper.service';
 
 @FilterInfo({
@@ -11,7 +11,7 @@ import { ImageHelperService } from '../image-helper.service';
     type: FilterTypes.SobelMag,
 })
 @Injectable({ providedIn: 'root' })
-export class SobelMagFilter extends BaseFilterService implements Filter {
+export class SobelMagFilter extends BaseFilter implements Filter {
 
     private mascaraX: Mascara = [
          1,   2,   1,
