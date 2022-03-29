@@ -24,6 +24,6 @@ export class RobertsXFilter extends BaseFilter implements Filter {
     }
 
     public transform(image: PgmFile, type: MascaraType): number[] {
-        return this.filterImage(image, this.mascara, type);
+        return this.filterImage(image, this.mascara, type, true);
     }
 }

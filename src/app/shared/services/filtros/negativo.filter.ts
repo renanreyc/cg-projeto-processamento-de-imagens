@@ -21,7 +21,6 @@ export class NegativoFilter implements Filter {
 
         const newImage = [];
         for (let pixel of image.pixels) {
-            const value = 255 - pixel;
             minValue = Math.min(pixel, minValue);
             maxValue = Math.max(pixel, maxValue);
             newImage.push(255 - pixel);

@@ -14,9 +14,9 @@ import { ImageHelperService } from '../image-helper.service';
 export class PrewittYFilter extends BaseFilter implements Filter {
 
     private mascara: Mascara = [
-          -1,  0, 1,
-          -1,  0, 1,
-          -1,  0, 1
+         -1,  0, 1,
+         -1,  0, 1,
+         -1,  0, 1
     ];
 
     constructor(imageHelperService: ImageHelperService) {
@@ -24,6 +24,6 @@ export class PrewittYFilter extends BaseFilter implements Filter {
     }
 
     public transform(image: PgmFile, type: MascaraType): number[] {
-        return this.filterImage(image, this.mascara, type, true);
+        return this.filterImage(image, this.mascara, type);
     }
 }

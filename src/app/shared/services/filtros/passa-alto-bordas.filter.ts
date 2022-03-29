@@ -12,7 +12,7 @@ import { ImageHelperService } from '../image-helper.service';
 })
 @Injectable({ providedIn: 'root' })
 export class PassaAltoBordaFilter extends BaseFilter implements Filter {
-    // prettier-ignore
+
     private mascara: Mascara = [
         -1, -1, -1,
         -1,  8, -1,

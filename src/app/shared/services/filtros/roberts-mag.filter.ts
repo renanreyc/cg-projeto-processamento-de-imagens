@@ -31,13 +31,13 @@ export class RobertsMagFilter extends BaseFilter implements Filter {
     }
 
     public transform(image: PgmFile, type: MascaraType): number[] {
-        const filterX = this.filterImage(image, this.mascaraX, type);
-        const filterY = this.filterImage(image, this.mascaraY, type);
+        const filterX = this.filterImage(image, this.mascaraX, type, true);
+        const filterY = this.filterImage(image, this.mascaraY, type, true);
 
         const imageMag = [];
 
         for (let i = 0; i < image.length; i++) {
-            imageMag.push(Math.abs(filterX[i]) + Math.abs(filterY[i]));
+            imageMag.push(filterX[i] + filterY[i]);
         }
 
         return imageMag;

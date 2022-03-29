@@ -23,10 +23,10 @@ export class BaseFilter {
     ): number[] {
         const newImage = [];
 
-        if (type === MascaraType.convolution) {
+        if (type == MascaraType.convolution) {
+            console.log("Convoluindo sim!")
             mascara = this.convolutionMascara(mascara);
         }
-
             
         for (let i = 0; i < image.length; i++) {
             const vizinhanca = this.getVizinhos(i, image);

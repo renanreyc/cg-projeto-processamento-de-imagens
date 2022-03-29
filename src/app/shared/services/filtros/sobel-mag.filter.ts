@@ -14,16 +14,16 @@ import { ImageHelperService } from '../image-helper.service';
 export class SobelMagFilter extends BaseFilter implements Filter {
 
     private mascaraX: Mascara = [
-         1,   2,   1,
+        -1,  -2,  -1,
          0,   0,   0,
-        -1,  -2,   -1
+         1,   2,   1
     ];
 
 
     private mascaraY: Mascara = [
-        1,   0,   -1,
-        2,   0,   -2,
-        1,   0,   -1
+       -1,   0,   1,
+       -2,   0,   2,
+       -1,   0,   1
     ];
 
     constructor(imageHelperService: ImageHelperService) {
@@ -31,8 +31,8 @@ export class SobelMagFilter extends BaseFilter implements Filter {
     }
 
     public transform(image: PgmFile, type: MascaraType): number[] {
-        const filterX = this.filterImage(image, this.mascaraX, type, true);
-        const filterY = this.filterImage(image, this.mascaraY, type, true);
+        const filterX = this.filterImage(image, this.mascaraX, type);
+        const filterY = this.filterImage(image, this.mascaraY, type);
 
         const imageMag = [];
 

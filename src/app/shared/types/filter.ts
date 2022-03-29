@@ -38,5 +38,6 @@ export enum FilterTypes {
 
 export type AltoReforcoOptions = { fator: number };
 export type GamaOptions = { y: number };
+export type ConstA = { a: number};
 
 export type LogaritmoOptions = { a: number };

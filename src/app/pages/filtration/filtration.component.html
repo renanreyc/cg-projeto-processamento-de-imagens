@@ -49,6 +49,15 @@
                     [(ngModel)]="gama"
                 />
             </span>
+            <span *ngIf="selectedFilter === 19" class="input-filter">
+                <label for="input-gama">A: </label>
+                <input
+                    type="text"
+                    name="input-gama"
+                    id="input-gama"
+                    [(ngModel)]="gama"
+                />
+            </span>
         </div>
 
         <div class="filtration-input">
