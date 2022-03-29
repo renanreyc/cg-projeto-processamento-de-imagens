@@ -1,8 +1,8 @@
 /**
- * Represent a image file storage on format PGM
- * The PGM is divided in two sections: the header and the body
- * The first three lines compose the header [1º - ID, 2º - Width and Height, 3º - Max Grey Level]
- * The rest of the file represent the body witch every element represent a pixel
+ - Representa um armazenamento de arquivo de imagem no formato PGM
+ - O PGM é dividido em duas seções: o cabeçalho e o corpo
+ - Onde as três primeiras linhas compõem o cabeçalho (1º ID, 2º Largura e Altura e 3º Maior Nível de Cinza)
+ * O resto do arquivo representa o corpo onde cada elemento representa um pixel
  */
 
 
@@ -59,10 +59,8 @@ export class PgmFile {
 
     private static processContent(content: string): PgmFile {
         const file = new PgmFile();
-
-        /* CONTENT HEADER */
-
-        // TODO: Can be optimized
+        
+        // CABEÇALHO
         const lines = content.split('\n');
 
         file.id = lines.shift();
@@ -73,7 +71,7 @@ export class PgmFile {
 
         file.maxGreyValue = Number(lines.shift());
 
-        // Remove last element because is always blank '\n'
+        // Remove o último elemento porque sempre é blank '\n'
         lines.pop();
 
         /* CONTENT BODY */

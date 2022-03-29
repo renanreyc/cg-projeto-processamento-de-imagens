@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Filter, FilterTypes } from '../../types/filter';
-import { Mask, MaskType } from '../../types/maks';
+import { Mascara, MascaraType } from '../../types/maks';
 import { PgmFile } from '../../types/pgm-image';
 import { FilterInfo } from '../../utils/filter.decorator';
 import { BaseFilterService } from '../base-filter.service';
@@ -12,27 +12,26 @@ import { ImageHelperService } from '../image-helper.service';
 })
 @Injectable({ providedIn: 'root' })
 export class RobertsCruzadoMagFilter extends BaseFilterService implements Filter {
-    // prettier-ignore
-    private maskX: Mask = [
-        0,  0, -1,
+
+    private mascaraX: Mascara = [
+        0,  0,  0,
         0,  1,  0,
-        0,  0,  0
+        0,  0, -1
     ];
 
-    // prettier-ignore
-    private maskY: Mask = [
-        -1,  0, 0,
-         0,  1, 0,
-         0,  0, 0
+    private mascaraY: Mascara = [
+         0,  0, 0,
+         0,  0, 1,
+         0, -1, 0
     ];
 
     constructor(imageHelperService: ImageHelperService) {
         super(imageHelperService);
     }
 
-    public transform(image: PgmFile, type: MaskType): number[] {
-        const filterX = this.filterImage(image, this.maskX, type, true);
-        const filterY = this.filterImage(image, this.maskY, type, true);
+    public transform(image: PgmFile, type: MascaraType): number[] {
+        const filterX = this.filterImage(image, this.mascaraX, type, true);
+        const filterY = this.filterImage(image, this.mascaraY, type, true);
 
         const imageMag = [];
 

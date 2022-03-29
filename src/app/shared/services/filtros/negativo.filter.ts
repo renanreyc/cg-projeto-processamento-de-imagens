@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Filter, FilterTypes } from '../../types/filter';
-import { MaskType } from '../../types/maks';
+import { MascaraType } from '../../types/maks';
 import { PgmFile } from '../../types/pgm-image';
 import { FilterInfo } from '../../utils/filter.decorator';
 import { ImageHelperService } from '../image-helper.service';
@@ -11,7 +11,7 @@ import { ImageHelperService } from '../image-helper.service';
 @Injectable({ providedIn: 'root' })
 export class NegativoFilter implements Filter {
     constructor(private readonly imageHelperService: ImageHelperService) {}
-    transform(image: PgmFile, type: MaskType, options?: {}): number[] {
+    transform(image: PgmFile, type: MascaraType, options?: {}): number[] {
         let minValue = 0;
         let maxValue = 255;
 

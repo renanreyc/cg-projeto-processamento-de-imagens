@@ -4,19 +4,19 @@ import { Injectable } from '@angular/core';
 export class ImageHelperService {
     /**
      *
-     * @param index actual index
-     * @param columns total of columns
-     * @param rows total of rows
-     * @returns [x, y] coordinate
+     * @param index index atual
+     * @param columns total de colunas
+     * @param rows total de linhas
+     * @returns [x, y] coordenadas
      */
     public calculateCoordinates(
         index: number,
         columns: number,
         rows: number
     ): [number, number] {
-        //for each row
+        //para cada linha
         for (let i = 0; i < rows; i++) {
-            //check if the index parameter is in the row
+            //verifica se o parametro do index está na linha
             if (index < columns * i + columns && index >= columns * i) {
                 //return x, y
                 return [i, index - columns * i];

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Filter, FilterTypes, LogaritmoOptions } from '../../types/filter';
-import { MaskType } from '../../types/maks';
+import { MascaraType } from '../../types/maks';
 import { PgmFile } from '../../types/pgm-image';
 import { FilterInfo } from '../../utils/filter.decorator';
 
@@ -10,7 +10,7 @@ import { FilterInfo } from '../../utils/filter.decorator';
 })
 @Injectable({ providedIn: 'root' })
 export class LogaritmoFilter implements Filter {
-    transform(image: PgmFile, type: MaskType, options?): number[] {
+    transform(image: PgmFile, type: MascaraType, options?): number[] {
         const newImage = [];
 
         const sortedPixels = Array.from(image.pixels).sort();

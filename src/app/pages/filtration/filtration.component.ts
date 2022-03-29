@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ImageUpload, PgmFile } from '../../shared/types/pgm-image';
 import { FilterTypes } from '../../shared/types/filter';
 import { FilterTypeInfo } from '../../shared/utils/filter.decorator';
-import { MaskType } from '../../shared/types/maks';
+import { MascaraType } from '../../shared/types/maks';
 import { FilterService } from '../../shared/services/filter.service';
 import { AltoReforcoFilter } from '../../shared/services/filtros/alto-reforco.filter';
 import { CanvasComponent } from '../../shared/components/canvas/canvas.component';
@@ -48,19 +48,19 @@ export class FiltrationComponent {
             if (this.selectedFilter === FilterTypes.AltoReforco) {
                 filteredImage = (filter as AltoReforcoFilter).transform(
                     this.image,
-                    MaskType.convolution,
+                    MascaraType.convolution,
                     { fator: this.fator }
                 );
             } else if (this.selectedFilter === FilterTypes.Gama) {
                 filteredImage = (filter as GamaFilter).transform(
                     this.image,
-                    MaskType.convolution,
+                    MascaraType.convolution,
                     { y: this.gama }
                 );
             } else {
                 filteredImage = filter.transform(
                     this.image,
-                    MaskType.convolution
+                    MascaraType.convolution
                 );
             }
 

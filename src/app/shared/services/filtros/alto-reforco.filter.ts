@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AltoReforcoOptions, Filter, FilterTypes } from '../../types/filter';
-import { Mask, MaskType } from '../../types/maks';
+import { Mascara, MascaraType } from '../../types/maks';
 import { PgmFile } from '../../types/pgm-image';
 import { FilterInfo } from '../../utils/filter.decorator';
 import { BaseFilterService } from '../base-filter.service';
@@ -18,7 +18,7 @@ export class AltoReforcoFilter
     implements Filter<AltoReforcoOptions> {
 
     // prettier-ignore
-    private mask: Mask = [
+    private mascara: Mascara = [
         -1/9, -1/9, -1/9,
         -1/9,    9, -1/9,
         -1/9, -1/9, -1/9
@@ -30,13 +30,13 @@ export class AltoReforcoFilter
 
     public transform(
         image: PgmFile,
-        type: MaskType,
+        type: MascaraType,
         options: AltoReforcoOptions = { fator: 1.2 }
     ): number[] {
 
-        const mask = Array.from(this.mask) as Mask;
-        mask[4] = ((mask[4] * options.fator) - 1) / 9;
+        const mascara = Array.from(this.mascara) as Mascara;
+        mascara[4] = ((mascara[4] * options.fator) - 1) / 9;
 
-        return this.filterImage(image, mask, type)
+        return this.filterImage(image, mascara, type)
     }
 }

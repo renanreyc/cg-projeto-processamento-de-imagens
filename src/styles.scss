@@ -40,11 +40,18 @@ select {
     cursor: pointer;
 }
 
-button.btn-green {
+button.btn-purple {
     width: 100%;
     color: white;
     background-color: #533263;
     border-color: #533263;
+}
+
+button.btn-purple:hover {
+    color: #533263;
+    background-color: white;
+    border-color: #533263;
+
 }
 
 .canva-image {

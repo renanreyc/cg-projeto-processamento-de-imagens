@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Filter, FilterTypes, GamaOptions } from '../../types/filter';
-import { MaskType } from '../../types/maks';
+import { MascaraType } from '../../types/maks';
 import { PgmFile } from '../../types/pgm-image';
 import { FilterInfo } from '../../utils/filter.decorator';
 import { ImageHelperService } from '../image-helper.service';
@@ -14,7 +14,7 @@ export class GamaFilter implements Filter<GamaOptions> {
 
     constructor(private readonly imageHelperService: ImageHelperService) {}
 
-    public transform(image: PgmFile, type: MaskType, options = { y: 0.5}): number[] {
+    public transform(image: PgmFile, type: MascaraType, options = { y: 0.5}): number[] {
 
         const newImage = [];
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import median from 'median';
 import { Filter, FilterTypes } from '../../types/filter';
-import { MaskType } from '../../types/maks';
+import { MascaraType } from '../../types/maks';
 import { PgmFile } from '../../types/pgm-image';
 import { FilterInfo } from '../../utils/filter.decorator';
 import { ImageHelperService } from '../image-helper.service';
@@ -15,7 +15,7 @@ export class TransferenciaIntensidadeFilter implements Filter {
 
     constructor(private readonly imageHelperService: ImageHelperService) {}
 
-    transform(image: PgmFile, type: MaskType, options?: {}): number[] {
+    transform(image: PgmFile, type: MascaraType, options?: {}): number[] {
         const newImage = [];
         const centerPixel = median(Array.from(image.pixels));
 

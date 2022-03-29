@@ -1,4 +1,4 @@
-import { Mask, MaskType } from '../types/maks';
+import { Mascara, MascaraType } from '../types/maks';
 import { PgmFile } from '../types/pgm-image';
 import { ImageHelperService } from './image-helper.service';
 
@@ -7,20 +7,20 @@ export class BaseFilterService {
 
     protected filterImage(
         image: PgmFile,
-        mask: Mask,
-        type: MaskType = MaskType.correlation,
+        mascara: Mascara,
+        type: MascaraType = MascaraType.correlation,
         abs = false
     ): number[] {
         const newImage = [];
 
-        if (type === MaskType.convolution) mask = this.convolutionMask(mask);
+        if (type === MascaraType.convolution) mascara = this.convolutionMascara(mascara);
 
         for (let i = 0; i < image.length; i++) {
-            const neighborhoods = this.getNeighborhoods(i, image);
+            const vizinhanca = this.getVizinhos(i, image);
             let sum = 0;
 
             for (let j = 0; j < 9; j++) {
-                sum += Math.floor(neighborhoods[j] * mask[j]);
+                sum += Math.floor(vizinhanca[j] * mascara[j]);
                 if (abs) sum = Math.abs(sum);
             }
 
@@ -30,58 +30,63 @@ export class BaseFilterService {
         return newImage;
     }
 
-    protected getNeighborhoods(i: number, image: PgmFile, zeroCount = true, addCenter = true): Mask {
+    protected getVizinhos(i: number, image: PgmFile, zeroCount = true, addCenter = true): Mascara {
 
-        const neighbors = [];
+        const vizinhos = [];
 
+        // Noroeste
         if (i - image.width - 1 >= 0 && i % image.width != 0)
-            // northwest
-            neighbors.push(image.pixels[i - image.width - 1]);
-        else if (zeroCount) neighbors.push(0);
+            vizinhos.push(image.pixels[i - image.width - 1]);
+        else if (zeroCount) vizinhos.push(0);
 
-        if (i - image.width >= 0) neighbors.push(image.pixels[i - image.width]);
-        // north
-        else if (zeroCount) neighbors.push(0);
+        // Norte
+        if (i - image.width >= 0) 
+            vizinhos.push(image.pixels[i - image.width]);
+        else if (zeroCount) vizinhos.push(0);
 
+        // Nordeste
         if (i - image.width + 1 >= 0 && (i + 1) % image.width != 0)
-            // northeast
-            neighbors.push(image.pixels[i - image.width + 1]);
-        else if (zeroCount) neighbors.push(0);
+            vizinhos.push(image.pixels[i - image.width + 1]);
+        else if (zeroCount) vizinhos.push(0);
 
-        if (i % image.width != 0) neighbors.push(image.pixels[i - 1]);
-        // west
-        else if (zeroCount) neighbors.push(0);
+        //Oeste
+        if (i % image.width != 0) 
+            vizinhos.push(image.pixels[i - 1]);
+        else if (zeroCount) vizinhos.push(0);
 
+        //Centro
         if (addCenter)
-            neighbors.push(image.pixels[i]);
+            vizinhos.push(image.pixels[i]);
 
-        if ((i + 1) % image.width != 0) neighbors.push(image.pixels[i + 1]);
-        // east
-        else if (zeroCount) neighbors.push(0);
+        //Leste
+        if ((i + 1) % image.width != 0) 
+            vizinhos.push(image.pixels[i + 1]);
+        else if (zeroCount) vizinhos.push(0);
 
+        // Sudoeste
         if (i + image.width - 1 < image.length && i % image.width != 0)
-            // southwest
-            neighbors.push(image.pixels[i + image.width - 1]);
-        else if (zeroCount) neighbors.push(0);
+            vizinhos.push(image.pixels[i + image.width - 1]);
+        else if (zeroCount) vizinhos.push(0);
 
-        if (i + image.width < image.length) neighbors.push(image.pixels[i + image.width]);
-        // south
-        else if (zeroCount) neighbors.push(0);
+        // Sul
+        if (i + image.width < image.length) 
+            vizinhos.push(image.pixels[i + image.width]);
+        else if (zeroCount) vizinhos.push(0);
 
+        //Sudeste
         if (i + image.width + 1 < image.length && (i + 1) % image.width != 0)
-            // southeast
-            neighbors.push(image.pixels[i + image.width + 1]);
-        else if (zeroCount) neighbors.push(0);
+            vizinhos.push(image.pixels[i + image.width + 1]);
+        else if (zeroCount) vizinhos.push(0);
 
-        return neighbors as Mask;
+        return vizinhos as Mascara;
     }
 
-    protected convolutionMask(mask: Mask): Mask {
-        // prettier-ignore
-        const convolution: Mask = [
-            mask[8], mask[7], mask[6],
-            mask[5], mask[4], mask[3],
-            mask[2], mask[1], mask[0],
+    protected convolutionMascara(mascara: Mascara): Mascara {
+
+        const convolution: Mascara = [
+            mascara[0], mascara[1], mascara[2],
+            mascara[3], mascara[4], mascara[5],
+            mascara[6], mascara[7], mascara[8],
         ];
 
         return convolution;

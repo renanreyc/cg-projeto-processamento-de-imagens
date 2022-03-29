@@ -1,10 +1,10 @@
-export type Mask = [
+export type Mascara = [
     number, number, number,
     number, number, number,
     number, number, number
 ]
 
-export enum MaskType {
+export enum MascaraType {
     correlation,
     convolution
 }
