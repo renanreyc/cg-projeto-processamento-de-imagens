@@ -16,7 +16,7 @@ export class RobertsXFilter extends BaseFilterService implements Filter {
     private mascara: Mascara = [
         0,  0, 0,
         0,  1, 0,
-        0,  -1, 0
+        0, -1, 0
     ];
 
     constructor(imageHelperService: ImageHelperService) {

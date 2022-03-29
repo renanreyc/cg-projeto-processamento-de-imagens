@@ -7,7 +7,7 @@ import { FilterInfo } from '../../utils/filter.decorator';
 import { ImageHelperService } from '../image-helper.service';
 
 @FilterInfo({
-    name: 'Transferência de Intetensidade',
+    name: 'Transferência de Intensidade',
     type: FilterTypes.TransferenciaIntensidade
 })
 @Injectable({ providedIn: 'root' })

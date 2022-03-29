@@ -10,7 +10,11 @@ import { ImageHelperService } from '../image-helper.service';
 })
 @Injectable({ providedIn: 'root' })
 export class NegativoFilter implements Filter {
-    constructor(private readonly imageHelperService: ImageHelperService) {}
+
+    constructor(private readonly imageHelperService: ImageHelperService) {
+
+    }
+    
     transform(image: PgmFile, type: MascaraType, options?: {}): number[] {
         let minValue = 0;
         let maxValue = 255;

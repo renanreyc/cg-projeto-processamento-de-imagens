@@ -5,7 +5,6 @@ import { PgmFile } from '../../types/pgm-image';
 import { FilterInfo } from '../../utils/filter.decorator';
 import { BaseFilterService } from '../base-filter.service';
 import { ImageHelperService } from '../image-helper.service';
-import { PassaAltoBordaFilter } from './passa-alto-bordas.filter';
 import { PassaBaixoMediaFilter } from './passa-baixo-media.filter';
 
 @FilterInfo({
@@ -13,14 +12,11 @@ import { PassaBaixoMediaFilter } from './passa-baixo-media.filter';
     type: FilterTypes.AltoReforco,
 })
 @Injectable({ providedIn: 'root' })
-export class AltoReforcoFilter
-    extends BaseFilterService
-    implements Filter<AltoReforcoOptions> {
+export class AltoReforcoFilter extends BaseFilterService implements Filter<AltoReforcoOptions> {
 
-    // prettier-ignore
     private mascara: Mascara = [
         -1/9, -1/9, -1/9,
-        -1/9,    9, -1/9,
+        -1/9,  9, -1/9,
         -1/9, -1/9, -1/9
     ];
 
