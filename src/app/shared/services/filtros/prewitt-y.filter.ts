@@ -14,9 +14,9 @@ import { ImageHelperService } from '../image-helper.service';
 export class PrewittYFilter extends BaseFilterService implements Filter {
 
     private mascara: Mascara = [
-          1,   0, -1,
-          1,   0, -1,
-          1,   0, -1
+          -1,  0, 1,
+          -1,  0, 1,
+          -1,  0, 1
     ];
 
     constructor(imageHelperService: ImageHelperService) {

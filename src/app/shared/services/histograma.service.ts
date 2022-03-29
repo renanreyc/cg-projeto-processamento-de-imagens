@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PgmFile } from '../types/pgm-image';
+
 @Injectable({ providedIn: 'root' })
 export class HistogramaService {
     public calculateHistograma(

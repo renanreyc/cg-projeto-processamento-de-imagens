@@ -2,6 +2,39 @@ import { Mascara, MascaraType } from '../types/maks';
 import { PgmFile } from '../types/pgm-image';
 import { ImageHelperService } from './image-helper.service';
 
+// export class Test {
+//     constructor(protected readonly imageHelperService: ImageHelperService) {}
+
+//     protected filterImage(
+//         image: PgmFile,
+//         mascara: Mascara,
+//         type: MascaraType = MascaraType.correlation,
+//         abs = false
+//     ): number[] {
+//         const interpolacao = 127; pegar o valor da médio ou mediana
+//         const newImage = [];
+
+//         //if (type === MascaraType.convolution) mascara = this.convolutionMascara(mascara);
+
+//         for (let i = 0; i < image.length; i++) {
+
+//             let sum = 0;
+
+//             for (let j = 0; j < 9; j++) {
+//                 if(image.pixels[i] >= interpolacao){
+//                     newImage.push(255)
+//                 } else {
+//                     newImage.push(0)
+//                 }
+//                 // salvar no formato pgm
+//             }
+
+//             newImage.push(sum);
+//         }
+
+//         return newImage;
+//     } //play do PPM 
+
 export class BaseFilterService {
     constructor(protected readonly imageHelperService: ImageHelperService) {}
 

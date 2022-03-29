@@ -71,7 +71,7 @@ export class HistogramComponent {
                     marker: {
                         color: 'rgba(255, 100, 102, 0.7)',
                         line: {
-                            color: 'rgba(255, 100, 102, 1)',
+                            color: 'rgb(255, 100, 102)',
                             width: 1,
                         },
                     },
