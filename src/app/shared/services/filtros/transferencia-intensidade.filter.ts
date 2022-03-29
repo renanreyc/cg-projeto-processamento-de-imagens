@@ -15,7 +15,11 @@ export class TransferenciaIntensidadeFilter implements Filter {
 
     constructor(private readonly imageHelperService: ImageHelperService) {}
 
-    transform(image: PgmFile, type: MascaraType, options?: {}): number[] {
+    transform(
+        image: PgmFile, 
+        type: MascaraType, 
+        options?: {}
+    ): number[] {
         const newImage = [];
         const centerPixel = median(Array.from(image.pixels));
 
@@ -24,8 +28,8 @@ export class TransferenciaIntensidadeFilter implements Filter {
 
         for (let pixel of image.pixels) {
 
-            const pow = (pixel - centerPixel) / image.width;
-            const result = Math.round(255 * (1 / 1 + Math.exp(-pow)));
+            const calculoPotencia = (pixel - centerPixel) / image.width; //r: pixel. w: centro dos valores de cinza, o: largura da janela
+            const result = Math.round(255 * (1 / 1 + Math.exp(-calculoPotencia)));
 
             minValue = Math.min(result, minValue);
             maxValue = Math.max(result, maxValue);

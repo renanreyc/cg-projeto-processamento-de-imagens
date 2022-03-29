@@ -7,6 +7,7 @@ import { FilterService } from '../../shared/services/filter.service';
 import { AltoReforcoFilter } from '../../shared/services/filtros/alto-reforco.filter';
 import { CanvasComponent } from '../../shared/components/canvas/canvas.component';
 import { GamaFilter } from 'src/app/shared/services/filtros/gama.filter';
+import { LogaritmoFilter } from 'src/app/shared/services/filtros/logaritimo.filter';
 import { TransformationService } from 'src/app/shared/services/transformation.service';
 
 @Component({
@@ -30,6 +31,8 @@ export class FiltrationComponent {
     public fator: number = 1.2;
 
     public gama: number = 0.5;
+
+    // public constA: number = 127;
 
     constructor(private readonly filterService: FilterService, private readonly transformationService: TransformationService) {
         this.filters = filterService.getAllFilters();
@@ -57,6 +60,12 @@ export class FiltrationComponent {
                     MascaraType.convolution,
                     { y: this.gama }
                 );
+            // } else if (this.selectedFilter === FilterTypes.Logaritmo) {
+            //     filteredImage = (filter as LogaritmoFilter).transform(
+            //         this.image,
+            //         MascaraType.convolution,
+            //         { a: this.constA}
+            //     );
             } else {
                 filteredImage = filter.transform(
                     this.image,

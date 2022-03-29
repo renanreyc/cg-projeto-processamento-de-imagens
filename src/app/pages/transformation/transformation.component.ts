@@ -32,6 +32,8 @@ export class TransformationComponent {
 
     public gama: number = 0.5;
 
+    // public a: number = 127;
+
     constructor(private readonly transformationService: TransformationService) {
         this.transformations = transformationService.getTransformations();
     }
