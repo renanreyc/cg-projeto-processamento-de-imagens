@@ -8,12 +8,13 @@ import { FormsModule } from '@angular/forms';
 import { FiltrationComponent } from './pages/filtration/filtration.component';
 import { OperationComponent } from './pages/operation/operation.component';
 import { HistogramComponent } from './pages/histogram/histogram.component';
+import { MorphologyComponent } from './pages/morphology/morphology.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { TransformationComponent } from './pages/transformation/transformation.component';
+
 
 @NgModule({
     imports: [BrowserModule, AppRoutingModule, SharedModule, FormsModule],
-    declarations: [AppComponent, FiltrationComponent, OperationComponent, HistogramComponent, NavbarComponent, TransformationComponent],
+    declarations: [AppComponent, FiltrationComponent, OperationComponent, HistogramComponent, NavbarComponent, MorphologyComponent],
     providers: [],
     bootstrap: [AppComponent],
 })

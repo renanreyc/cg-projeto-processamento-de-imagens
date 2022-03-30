@@ -10,8 +10,8 @@
         </div>
     </div>
 
-    <div class="transformation-inputs">
-        <div class="transformation-input">
+    <div class="morphology-inputs">
+        <div class="morphology-input">
             <app-image-upload
                 [imageType]="'filter'"
                 [label]="'Selecione uma imagem'"
@@ -19,12 +19,12 @@
             ></app-image-upload>
         </div>
 
-        <div class="transformation-input">
+        <div class="morphology-input">
             <select
                 name="select-filter"
                 (change)="onTransformationSelectChange($event.target.value)"
             >
-                <option value="none">Selecione o tipo de transformação</option>
+                <option value="none">Selecione o tipo de Operador</option>
                 <option *ngFor="let transformation of transformations" [value]="transformation.type">
                     {{ transformation.name }}
                 </option>
@@ -39,27 +39,9 @@
                     [(ngModel)]="degrees"
                 />
             </span>
-
-            <span *ngIf="selectedTransformation === 0 || selectedTransformation === 2 || selectedTransformation === 3" class="input-filter">
-                <label for="input-fator">X: </label>
-                <input
-                    type="text"
-                    name="input-fator"
-                    id="input-fator"
-                    [(ngModel)]="x"
-                />
-                <br>
-                <label for="input-fator">Y: </label>
-                <input
-                    type="text"
-                    name="input-fator"
-                    id="input-fator"
-                    [(ngModel)]="y"
-                />
-            </span>
         </div>
 
-        <div class="transformation-input">
+        <div class="morphology-input">
             <button class="button btn-purple" (click)="onTransformationClick()">
                 Transformar
             </button>
@@ -67,7 +49,7 @@
     </div>
 
     <div class="has-text-centered">
-        <label>Imagem Transformada</label>
+        <label>Imagem Após Operador Morfológico</label>
 
         <div class="canva-image mt-3">
             <app-canvas

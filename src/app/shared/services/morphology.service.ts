@@ -1,75 +1,40 @@
 import { Injectable } from '@angular/core';
 import { PgmFile } from '../types/pgm-image';
-import { TransformationInfo, TransformationTypes } from '../types/transformation';
+import { MorphologyInfo, MorphologyTypes } from '../types/morphology';
 
 @Injectable({ providedIn: 'root' })
-export class TransformationService {
-    private readonly transformations: TransformationInfo[] = [
+export class MorphologyService {
+    private readonly transformations: MorphologyInfo[] = [
         {
-            name: 'Rotação',
-            type: TransformationTypes.rotate,
+            name: 'Dilatação',
+            type: MorphologyTypes.dilation,
         },
         {
-            name: 'Escalonamento',
-            type: TransformationTypes.scale,
+            name: 'Erosão',
+            type: MorphologyTypes.erosion,
         },
         {
-            name: 'Translação',
-            type: TransformationTypes.translation,
+            name: 'Fechamento',
+            type: MorphologyTypes.closure,
         },
         {
-            name: 'Cisalhamento',
-            type: TransformationTypes.shear,
+            name: 'Abertura',
+            type: MorphologyTypes.opening,
         },
     ];
 
     
-    public getTransformations(): TransformationInfo[] {
+    public getTransformations(): MorphologyInfo[] {
         return this.transformations;
     }
 
-    public rotate(image: PgmFile, deg: number): PgmFile {
-        deg %= 360;
-        const rad = (deg * Math.PI) / 180;
-        const cosine = Math.cos(rad);
-        const sine = Math.sin(rad);
+    public dilation(image: PgmFile): PgmFile {
+        let deg = 360;
+
 
         const newImage = Array.from(Array(image.length).keys()).map(() => 255);
 
-        const translate2Cartesian = this.createTranslationFunction(
-            -(image.width / 2),
-            -(image.height / 2)
-        );
-        const translate2Screen = this.createTranslationFunction(
-            image.width / 2 + 0.5,
-            image.height / 2 + 0.5
-        );
-
-        for (let x = 1; x <= image.height; x++) {
-            for (let y = 1; y <= image.width; y++) {
-                const cartesian = translate2Cartesian(x, y);
-                const source = translate2Screen(
-                    cosine * cartesian.x - sine * cartesian.y,
-                    cosine * cartesian.y + sine * cartesian.x
-                );
-
-                const dstIdx = image.width * (y - 1) + x - 1;
-
-                if (
-                    source.x >= 0 &&
-                    source.x < image.width &&
-                    source.y >= 0 &&
-                    source.y < image.height
-                ) {
-                    const srcIdx =
-                        (image.width * (source.y | 0) + source.x) | 0;
-
-                    newImage[dstIdx] = image.pixels[srcIdx];
-                } else {
-                    newImage[dstIdx] = 255;
-                }
-            }
-        }
+       
 
         const newPgm = new PgmFile();
         newPgm.pixels = newImage;

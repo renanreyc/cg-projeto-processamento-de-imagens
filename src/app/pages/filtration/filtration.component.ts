@@ -8,7 +8,7 @@ import { AltoReforcoFilter } from '../../shared/services/filtros/alto-reforco.fi
 import { CanvasComponent } from '../../shared/components/canvas/canvas.component';
 import { GamaFilter } from 'src/app/shared/services/filtros/gama.filter';
 import { LogaritmoFilter } from 'src/app/shared/services/filtros/logaritimo.filter';
-import { TransformationService } from 'src/app/shared/services/transformation.service';
+import { MorphologyService } from 'src/app/shared/services/morphology.service';
 
 @Component({
     selector: 'app-filtration',
@@ -34,7 +34,7 @@ export class FiltrationComponent {
 
     // public constA: number = 127;
 
-    constructor(private readonly filterService: FilterService, private readonly transformationService: TransformationService) {
+    constructor(private readonly filterService: FilterService) {
         this.filters = filterService.getAllFilters();
     }
 
