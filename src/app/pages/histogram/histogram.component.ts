@@ -37,17 +37,23 @@ export class HistogramComponent {
     }
 
     private showHistogram() {
+
+        // Cria Array do Histograma com os pixel da imagem
         const histogram = this.histogramaService.calculateHistograma(
             this.histogramImage.pixels,
             this.histogramImage.length,
             this.histogramImage.maxGreyValue
         );
 
+        //Mapeamento dos pixels após histograma Equalizaddo
         const pixelsMap = this.histogramaService.equalizeHistogram(
             histogram,
             this.histogramImage.maxGreyValue
         );
+        // novõ mapeamento para os pixels equalizados
+        console.log(pixelsMap)
 
+        //nova imagem com o novo mapeamento
         const newImage = this.histogramImage.pixels.map((value) => pixelsMap[value]);
 
         this.histogramEqualizedCanvas.drawImage(
@@ -56,6 +62,7 @@ export class HistogramComponent {
             newImage
         );
 
+        // Cria Array do Histograma com a nova imagem equalizada
         const equalizedHistogram = this.histogramaService.calculateHistograma(
             newImage,
             this.histogramImage.length,

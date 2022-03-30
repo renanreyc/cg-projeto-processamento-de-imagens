@@ -62,21 +62,22 @@ export class ImageHelperService {
         return this.normalization(newImage, maxValue, minValue, 255);
     }
 
-    public multiplyByScalar(image: number[], scalar: number): number[] {
-        const newImage = [];
-        let minValue = 255;
-        let maxValue = 0;
+    //retirar?
+    // public multiplyByScalar(image: number[], scalar: number): number[] {
+    //     const newImage = [];
+    //     let minValue = 255;
+    //     let maxValue = 0;
 
-        for (let i = 0; i < image.length; i++) {
-            let a = image[i];
-            const pixel = image[i] * scalar;
-            minValue = Math.min(pixel, minValue);
-            maxValue = Math.max(pixel, maxValue);
-            newImage.push(pixel);
-        }
+    //     for (let i = 0; i < image.length; i++) {
+    //         let a = image[i];
+    //         const pixel = image[i] * scalar;
+    //         minValue = Math.min(pixel, minValue);
+    //         maxValue = Math.max(pixel, maxValue);
+    //         newImage.push(pixel);
+    //     }
 
-        return this.normalization(newImage, maxValue, minValue, 255);
-    }
+    //     return this.normalization(newImage, maxValue, minValue, 255);
+    // }
 
     public multiply(imageA: number[], imageB: number[]): number[] {
         const newImage = [];
@@ -123,6 +124,8 @@ export class ImageHelperService {
             imageA.length < imageB.length ? imageA.length : imageB.length;
 
         for (let i = 0; i < length; i++) {
+            // Retorna um 1 para cada posição em que os bits da posição 
+            // correspondente de ambos operandos sejam uns.
             const pixel = imageA[i] & imageB[i];
             minValue = Math.min(pixel, minValue);
             maxValue = Math.max(pixel, maxValue);
@@ -141,6 +144,8 @@ export class ImageHelperService {
             imageA.length < imageB.length ? imageA.length : imageB.length;
 
         for (let i = 0; i < length; i++) {
+            //Retorna um 0 para cada posição em que os bits da posição
+            //correspondente de  ambos os operandos sejam zeros.
             const pixel = imageA[i] | imageB[i];
             minValue = Math.min(pixel, minValue);
             maxValue = Math.max(pixel, maxValue);
@@ -159,6 +164,10 @@ export class ImageHelperService {
             imageA.length < imageB.length ? imageA.length : imageB.length;
 
         for (let i = 0; i < length; i++) {
+            // Retorna um 0 para cada posição em que os bits da posição 
+            // correspondente são os mesmos.
+            // [Retorna um 1 para cada posição em que os bits da posição
+            // correspondente sejam diferentes.]
             const pixel = imageA[i] ^ imageB[i];
             minValue = Math.min(pixel, minValue);
             maxValue = Math.max(pixel, maxValue);
@@ -168,6 +177,7 @@ export class ImageHelperService {
         return this.normalization(newImage, maxValue, minValue, 255);;
     }
 
+    //g(x,y) = ((f - fmin) / (fmax - fmin)) * 255
     public normalization(image: number[], maxPixelvalue: number, minPixelValue: number, maxCinzaValue: number): number[] {
         const newImage = [];
 

@@ -42,6 +42,7 @@ export class OperationService {
         return this.operations;
     }
 
+    //Retorna a nova imagem de acordo com a operação
     public transform(imageA: PgmFile, imageB: PgmFile, operation: OperationsTypes): number[] {
         switch (operation) {
             case OperationsTypes.soma:

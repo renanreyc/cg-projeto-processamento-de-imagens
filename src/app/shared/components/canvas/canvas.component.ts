@@ -48,22 +48,22 @@ export class CanvasComponent implements OnInit, AfterViewInit {
 
         let pixelCount = 0;
         for (let pixel of pixels) {
-            // RED
+            // VERMELHO
             data[0 + pixelCount] = pixel;
-            // GREEN
+            // VERDE
             data[1 + pixelCount] = pixel;
-            // BLUE
+            // AZUL
             data[2 + pixelCount] = pixel;
-            // ALPHA
+            // ALFA
             data[3 + pixelCount] = 255;
 
             pixelCount += 4;
         }
 
-        // Draw next tick, after angular redraw component sizes
-        // There is no 'setImmediate' on browsers
+        // Desenha o proximo tick, após o redesenho dos componentes
+
         setTimeout(() => {
-            // Draw image on canvas position [0, 0]
+            // Desenha uma imagem na janela na posição [0, 0]
             this.canvasContext.putImageData(imageData, 0, 0);
         }, 0);
     }
