@@ -24,13 +24,6 @@ export class MorphologyComponent {
 
     public selectedTransformation: MorphologyTypes;
 
-    // public structure: number = 90;
-
-    public x: number = 0;
-
-    public y: number = 0;
-
-    public gama: number = 0.5;
 
     constructor(private readonly morphologyService: MorphologyService) {
         this.transformations = morphologyService.getTransformations();

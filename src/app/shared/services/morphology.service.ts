@@ -32,27 +32,26 @@ export class MorphologyService {
     }
 
     public dilation(image: PgmFile): PgmFile {  
-        const newMatriz = [] 
         const newImage = [] 
+        const newMatriz = []
         const imageBit = this.convertImageToBit(image);   
         let height = image.height;
         let width = image.width;
 
-        const imageWithDilatation = this.operation(imageBit, width, height, this.elementStructuring, 'dilatation')
+        const imageWithDilatation = this.operation(imageBit, width, height, this.elementStructuring, 'dilation')
 
         for (let i = 0; i < Number(image.height); i++) {
             newMatriz[i] = []
             for (let j = 0; j < Number(image.width); j++) {
                 if(imageWithDilatation[i][j] == 1){
-                    newImage.push(255);
-                    newMatriz[i].push(255);
+                    newMatriz[i][j] = 255
+                    newImage.push(255)
                 }else {
-                    newImage.push(255);
-                    newMatriz[i].push(0)    
+                    newMatriz[i][j] = 0
+                    newImage.push(0)
                 }
             }
         }
-
 
         const newPgm = new PgmFile();
         newPgm.pixels = newImage;
@@ -64,29 +63,29 @@ export class MorphologyService {
     }
     public erosion(image: PgmFile): PgmFile {
         const newImage = [] 
+        const newMatriz = []
         const imageBit = this.convertImageToBit(image);   
         let height = image.height;
         let width = image.width;
 
-        const imageWithErosion = this.operation(imageBit, width, height, this.elementStructuring, 'erosion')
-        console.log(imageWithErosion) 
+        const imageWithDilatation = this.operation(imageBit, width, height, this.elementStructuring, 'erosion')
 
         for (let i = 0; i < Number(image.height); i++) {
+            newMatriz[i] = []
             for (let j = 0; j < Number(image.width); j++) {
-                newImage.push(imageWithErosion[i][j])
-            }
-        }
-
-        for(let i = 0; i < newImage.length;i++){
-            if(newImage[i] == 1){
-                newImage[i] = 255;
-            } else {
-                newImage[i] = 0;
+                if(imageWithDilatation[i][j] == 1){
+                    newMatriz[i][j] = 255
+                    newImage.push(255)
+                }else {
+                    newMatriz[i][j] = 0
+                    newImage.push(0)
+                }
             }
         }
 
         const newPgm = new PgmFile();
         newPgm.pixels = newImage;
+        newPgm.matrizpixels = newMatriz;
         newPgm.height = height;
         newPgm.width = width;        
 
@@ -95,29 +94,34 @@ export class MorphologyService {
 
     public opening(image: PgmFile): PgmFile {
         const newImage = [] 
-        const imageBit = this.convertImageToBit(image);   
+        const newMatriz = [] 
         let height = image.height;
         let width = image.width;
 
-        const imageWithErosion = this.operation(this.erosion, width, height, this.elementStructuring, 'dilatation')
-        console.log(imageWithErosion) 
+        const imageWithOpening = this.operation(
+            this.erosion(image).matrizpixels, 
+            width, 
+            height, 
+            this.elementStructuring, 
+            'dilatation')
+        console.log(imageWithOpening) 
 
         for (let i = 0; i < Number(image.height); i++) {
+            newMatriz[i] = []
             for (let j = 0; j < Number(image.width); j++) {
-                newImage.push(imageWithErosion[i][j])
-            }
-        }
-
-        for(let i = 0; i < newImage.length;i++){
-            if(newImage[i] == 1){
-                newImage[i] = 255;
-            } else {
-                newImage[i] = 0;
+                if(imageWithOpening[i][j] == 1){
+                    newMatriz[i][j] = 255
+                    newImage.push(255)
+                }else {
+                    newMatriz[i][j] = 0
+                    newImage.push(0)
+                }
             }
         }
 
         const newPgm = new PgmFile();
         newPgm.pixels = newImage;
+        newPgm.matrizpixels = newMatriz;
         newPgm.height = height;
         newPgm.width = width;        
 
@@ -126,29 +130,34 @@ export class MorphologyService {
 
     public closure(image: PgmFile): PgmFile {
         const newImage = [] 
-        const imageBit = this.convertImageToBit(image);   
+        const newMatriz = [] 
         let height = image.height;
         let width = image.width;
 
-        const imageWithClosure = this.operation(this.dilation, width, height, this.elementStructuring, 'erosion')
-
+        const imageWithOpening = this.operation(
+            this.dilation(image).matrizpixels, 
+            width, 
+            height, 
+            this.elementStructuring, 
+            'erosion')
+        console.log(imageWithOpening) 
 
         for (let i = 0; i < Number(image.height); i++) {
+            newMatriz[i] = []
             for (let j = 0; j < Number(image.width); j++) {
-                newImage.push(imageWithClosure[i][j])
-            }
-        }
-
-        for(let i = 0; i < newImage.length;i++){
-            if(newImage[i] == 1){
-                newImage[i] = 255;
-            } else {
-                newImage[i] = 0;
+                if(imageWithOpening[i][j] == 1){
+                    newMatriz[i][j] = 255
+                    newImage.push(255)
+                }else {
+                    newMatriz[i][j] = 0
+                    newImage.push(0)
+                }
             }
         }
 
         const newPgm = new PgmFile();
         newPgm.pixels = newImage;
+        newPgm.matrizpixels = newMatriz;
         newPgm.height = height;
         newPgm.width = width;        
 
@@ -187,24 +196,28 @@ export class MorphologyService {
         return newImage;        
     }
 
-    private operation(image, width, height, structuringElement,operate = 'erosion') {
-        let res = [];
+    private operation(image, width, height, structuringElement, operate = 'erosion') {
+        let res = [];    
 
-        let target = operate === 'dilation' ? 1 : structuringElement.reduce((a, b) => a + b, 0);
-    
+        let target = operate === 'erosion' ? 1 : structuringElement.reduce((a, b) => a + b, 0);
+        
+        
         for (let i = 0; i < height; i++) {
             res [i] = []
             for (let j = 0; j < width; j++) {
                 let acc = 0
     
+                //PRIMEIRA LINHA
                 acc += structuringElement[0] & (i === 0 || j === 0 ? 0 : image[i - 1][j - 1]);
                 acc += structuringElement[1] & (i === 0 ? 0 : image[i - 1][j]);
                 acc += structuringElement[2] & (i === 0 || j === width - 1 ? 0 : image[i - 1][j + 1]);
     
+                //SEGUNDA LINHA
                 acc += structuringElement[3] & (j === 0 ? 0 : image[i][j - 1]);
                 acc += structuringElement[4] & image[i][j];
                 acc += structuringElement[5] & (j === width - 1 ? 0 : image[i][j + 1]);
     
+                //TERCEIRA LINHA
                 acc += structuringElement[6] & (i === height - 1 || j === 0 ? 0 : image[i + 1][j - 1]);
                 acc += structuringElement[7] & (i === height - 1 ? 0 : image[i + 1][j]);
                 acc += structuringElement[8] & (i === height - 1 || j === image.w - 1 ? 0 : image[i + 1][j + 1]);

@@ -1,8 +1,9 @@
 export enum MorphologyTypes {
     dilation, 
     erosion,
+    opening,
     closure,
-    opening
+    
 }
 
 export interface MorphologyInfo {
