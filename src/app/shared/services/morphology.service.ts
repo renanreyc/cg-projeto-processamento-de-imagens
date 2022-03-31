@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import median from 'median';
 import { PgmFile } from '../types/pgm-image';
 import { MorphologyInfo, MorphologyTypes } from '../types/morphology';
-import { Morph } from './morphology/morphy';
+
 
 @Injectable({ providedIn: 'root' })
 export class MorphologyService {
-    elementStructuring = [1, 1]
+    elementStructuring = [0, 1, 0, 1, 1, 1, 0, 1, 0]
 
     private readonly transformations: MorphologyInfo[] = [
         {
@@ -32,6 +32,37 @@ export class MorphologyService {
     }
 
     public dilation(image: PgmFile): PgmFile {  
+        const newMatriz = [] 
+        const newImage = [] 
+        const imageBit = this.convertImageToBit(image);   
+        let height = image.height;
+        let width = image.width;
+
+        const imageWithDilatation = this.operation(imageBit, width, height, this.elementStructuring, 'dilatation')
+
+        for (let i = 0; i < Number(image.height); i++) {
+            newMatriz[i] = []
+            for (let j = 0; j < Number(image.width); j++) {
+                if(imageWithDilatation[i][j] == 1){
+                    newImage.push(255);
+                    newMatriz[i].push(255);
+                }else {
+                    newImage.push(255);
+                    newMatriz[i].push(0)    
+                }
+            }
+        }
+
+
+        const newPgm = new PgmFile();
+        newPgm.pixels = newImage;
+        newPgm.matrizpixels = newMatriz;
+        newPgm.height = height;
+        newPgm.width = width;
+        
+        return newPgm;
+    }
+    public erosion(image: PgmFile): PgmFile {
         const newImage = [] 
         const imageBit = this.convertImageToBit(image);   
         let height = image.height;
@@ -42,7 +73,7 @@ export class MorphologyService {
 
         for (let i = 0; i < Number(image.height); i++) {
             for (let j = 0; j < Number(image.width); j++) {
-                newImage.push(imageBit[i][j])
+                newImage.push(imageWithErosion[i][j])
             }
         }
 
@@ -57,40 +88,73 @@ export class MorphologyService {
         const newPgm = new PgmFile();
         newPgm.pixels = newImage;
         newPgm.height = height;
-        newPgm.width = width;
+        newPgm.width = width;        
+
         return newPgm;
     }
-    public scale(image: PgmFile): PgmFile {
-      
-        const newImage = Array.from(Array(image.length).keys()).map(() => 255);
+
+    public opening(image: PgmFile): PgmFile {
+        const newImage = [] 
+        const imageBit = this.convertImageToBit(image);   
+        let height = image.height;
+        let width = image.width;
+
+        const imageWithErosion = this.operation(this.erosion, width, height, this.elementStructuring, 'dilatation')
+        console.log(imageWithErosion) 
+
+        for (let i = 0; i < Number(image.height); i++) {
+            for (let j = 0; j < Number(image.width); j++) {
+                newImage.push(imageWithErosion[i][j])
+            }
+        }
+
+        for(let i = 0; i < newImage.length;i++){
+            if(newImage[i] == 1){
+                newImage[i] = 255;
+            } else {
+                newImage[i] = 0;
+            }
+        }
 
         const newPgm = new PgmFile();
         newPgm.pixels = newImage;
-        newPgm.height = 10;
-        newPgm.width = 10;
+        newPgm.height = height;
+        newPgm.width = width;        
 
         return newPgm;
     }
-    public translation(image: PgmFile): PgmFile {
-        const newImage = Array.from(Array(image.length).keys()).map(() => 255);
+
+    public closure(image: PgmFile): PgmFile {
+        const newImage = [] 
+        const imageBit = this.convertImageToBit(image);   
+        let height = image.height;
+        let width = image.width;
+
+        const imageWithClosure = this.operation(this.dilation, width, height, this.elementStructuring, 'erosion')
+
+
+        for (let i = 0; i < Number(image.height); i++) {
+            for (let j = 0; j < Number(image.width); j++) {
+                newImage.push(imageWithClosure[i][j])
+            }
+        }
+
+        for(let i = 0; i < newImage.length;i++){
+            if(newImage[i] == 1){
+                newImage[i] = 255;
+            } else {
+                newImage[i] = 0;
+            }
+        }
 
         const newPgm = new PgmFile();
         newPgm.pixels = newImage;
-        newPgm.height = image.height;
-        newPgm.width = image.width;
+        newPgm.height = height;
+        newPgm.width = width;        
 
         return newPgm;
     }
-    public shear(image: PgmFile, deltaX: number, deltaY: number): PgmFile {
-        const newImage = Array.from(Array(image.length).keys()).map(() => 255);
 
-        const newPgm = new PgmFile();
-        newPgm.pixels = newImage;
-        newPgm.height = image.height;
-        newPgm.width = image.width;
-
-        return newPgm;
-    }
 
     public convertImageToBit(image: PgmFile): number[] {
         const auxImage = [];

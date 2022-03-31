@@ -46,21 +46,20 @@ export class MorphologyComponent {
             if (this.selectedTransformation === MorphologyTypes.dilation) {
                 this.transformedImage = this.morphologyService.dilation(
                     this.image
-                    // ,this.structure
+
                 );
             } else if (this.selectedTransformation === MorphologyTypes.erosion) {
-                this.transformedImage = this.morphologyService.scale(
+                this.transformedImage = this.morphologyService.erosion(
                     this.image
 
                 )
             } else if (this.selectedTransformation === MorphologyTypes.closure) {
-                this.transformedImage = this.morphologyService.shear(
-                    this.image,
-                    this.x,
-                    this.y
+                this.transformedImage = this.morphologyService.closure(
+                    this.image
+
                 )
             } else if (this.selectedTransformation === MorphologyTypes.opening) {
-                this.transformedImage = this.morphologyService.translation(
+                this.transformedImage = this.morphologyService.opening(
                     this.image
                 )
             }

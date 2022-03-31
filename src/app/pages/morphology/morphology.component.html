@@ -29,16 +29,6 @@
                     {{ transformation.name }}
                 </option>
             </select>
-
-            <span *ngIf="selectedTransformation === 1" class="input-filter">
-                <label for="input-fator">Graus: </label>
-                <input
-                    type="text"
-                    name="input-fator"
-                    id="input-fator"
-                    [(ngModel)]="degrees"
-                />
-            </span>
         </div>
 
         <div class="morphology-input">
