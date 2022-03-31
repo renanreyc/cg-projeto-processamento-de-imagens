@@ -17,7 +17,7 @@ export class PassaAltoAgucamentoFilter
 
     private mascara: Mascara = [
         -1, -1, -1,
-        -1,  9, -1,
+        -1,  8, -1,
         -1, -1, -1
     ];
 

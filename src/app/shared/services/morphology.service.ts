@@ -186,9 +186,9 @@ export class MorphologyService {
             newImage[i] = []
             for (let j = 0; j < Number(image.width); j++) {
                 if(image.matrizpixels[i][j] >= medianValue){
-                    newImage[i][j] = 1;
-                } else {
                     newImage[i][j] = 0;
+                } else {
+                    newImage[i][j] = 1;
                 }
             }
         }

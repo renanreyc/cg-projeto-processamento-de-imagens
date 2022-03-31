@@ -31,7 +31,7 @@ export class AltoReforcoFilter extends BaseFilter implements Filter<AltoReforcoO
     ): number[] {
 
         const mascara = Array.from(this.mascara) as Mascara;
-        mascara[4] = ((mascara[4] * options.fator) - 1) / 9;
+        mascara[4] = ((mascara[4] * options.fator) - 1);
 
         return this.filterImage(image, mascara, type)
     }
