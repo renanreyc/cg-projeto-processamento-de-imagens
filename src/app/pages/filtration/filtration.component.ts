@@ -7,7 +7,7 @@ import { FilterService } from '../../shared/services/filter.service';
 import { AltoReforcoFilter } from '../../shared/services/filtros/alto-reforco.filter';
 import { CanvasComponent } from '../../shared/components/canvas/canvas.component';
 import { GamaFilter } from 'src/app/shared/services/filtros/gama.filter';
-import { LogaritmoFilter } from 'src/app/shared/services/filtros/logaritimo.filter';
+import { TransferenciaIntensidadeFilter } from 'src/app/shared/services/filtros/transferencia-intensidade.filter';
 import { MorphologyService } from 'src/app/shared/services/morphology.service';
 
 @Component({
@@ -21,18 +21,12 @@ export class FiltrationComponent {
 
     @ViewChild('outPutCanvas')
     public outPutCanvas: CanvasComponent;
-
     public image: PgmFile;
-
     public filters: FilterTypeInfo[] = [];
-
     public selectedFilter: FilterTypes;
-
     public fator: number = 1.2;
-
     public gama: number = 0.5;
-
-    // public constA: number = 127;
+    public largura: number = 100;
 
     constructor(private readonly filterService: FilterService) {
         this.filters = filterService.getAllFilters();
@@ -60,12 +54,12 @@ export class FiltrationComponent {
                     MascaraType.convolution,
                     { y: this.gama }
                 );
-            // } else if (this.selectedFilter === FilterTypes.Logaritmo) {
-            //     filteredImage = (filter as LogaritmoFilter).transform(
-            //         this.image,
-            //         MascaraType.convolution,
-            //         { a: this.constA}
-            //     );
+            } else if (this.selectedFilter === FilterTypes.TransferenciaIntensidade) {
+                filteredImage = (filter as TransferenciaIntensidadeFilter).transform(
+                    this.image,
+                    MascaraType.convolution,
+                    { largura: this.largura }
+                );
             } else {
                 filteredImage = filter.transform(
                     this.image,

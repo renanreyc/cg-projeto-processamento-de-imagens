@@ -55,7 +55,7 @@ export class MorphologyComponent {
                 this.transformedImage = this.morphologyService.opening(
                     this.image
                 )
-            }
+            } 
 
 
             this.outPutCanvas.drawImage(

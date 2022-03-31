@@ -14,7 +14,11 @@ export class GamaFilter implements Filter<GamaOptions> {
 
     constructor(private readonly imageHelperService: ImageHelperService) {}
 
-    public transform(image: PgmFile, type: MascaraType, options = { y: 0.5}): number[] {
+    public transform(
+        image: PgmFile, 
+        type: MascaraType, 
+        options = { y: 0.5}
+        ): number[] {
 
         const newImage = [];
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import median from 'median';
-import { Filter, FilterTypes } from '../../types/filter';
+import { Filter, FilterTypes, Largura } from '../../types/filter';
 import { MascaraType } from '../../types/maks';
 import { PgmFile } from '../../types/pgm-image';
 import { FilterInfo } from '../../utils/filter.decorator';
@@ -11,14 +11,14 @@ import { ImageHelperService } from '../image-helper.service';
     type: FilterTypes.TransferenciaIntensidade
 })
 @Injectable({ providedIn: 'root' })
-export class TransferenciaIntensidadeFilter implements Filter {
+export class TransferenciaIntensidadeFilter implements Filter<Largura> {
 
     constructor(private readonly imageHelperService: ImageHelperService) {}
 
     transform(
         image: PgmFile, 
         type: MascaraType, 
-        options?: {}
+        options: Largura = { largura: 1}
     ): number[] {
         const newImage = [];
         const centerPixel = median(Array.from(image.pixels));
@@ -28,7 +28,7 @@ export class TransferenciaIntensidadeFilter implements Filter {
 
         for (let pixel of image.pixels) {
 
-            const calculoPotencia = (pixel - centerPixel) / image.width; //r: pixel. w: centro dos valores de cinza, o: largura da janela
+            const calculoPotencia = (pixel - centerPixel) / options.largura; //r: pixel. w: centro dos valores de cinza, o: largura da janela
             const result = Math.round(255 * (1 / 1 + Math.exp(-calculoPotencia)));
 
             minValue = Math.min(result, minValue);
