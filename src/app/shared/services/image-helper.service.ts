@@ -62,23 +62,6 @@ export class ImageHelperService {
         return this.normalization(newImage, maxValue, minValue, 255);
     }
 
-    //retirar?
-    // public multiplyByScalar(image: number[], scalar: number): number[] {
-    //     const newImage = [];
-    //     let minValue = 255;
-    //     let maxValue = 0;
-
-    //     for (let i = 0; i < image.length; i++) {
-    //         let a = image[i];
-    //         const pixel = image[i] * scalar;
-    //         minValue = Math.min(pixel, minValue);
-    //         maxValue = Math.max(pixel, maxValue);
-    //         newImage.push(pixel);
-    //     }
-
-    //     return this.normalization(newImage, maxValue, minValue, 255);
-    // }
-
     public multiply(imageA: number[], imageB: number[]): number[] {
         const newImage = [];
         let minValue = 255;

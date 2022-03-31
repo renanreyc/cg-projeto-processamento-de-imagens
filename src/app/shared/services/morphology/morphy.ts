@@ -12,7 +12,7 @@ export class Morph {
     ) {
         if (bits) {
             this.data = bits;
-            if (this.height * this.width != this.data.length)
+            if (false) //(this.height * this.width != this.data.length)
                 throw 'MORPH_DIMENSION_ERROR: incorrect dimensions';
         } else {
             this.data = MorphologyService.createEmptyArrayWithZeros(this.height, this.width);
@@ -70,7 +70,7 @@ export class Morph {
         return this;
     }
 
-    public erodeWithElement(el: StructuringElement): Morph {
+    public erodeWithElement(el: StructuringElement): number[] {
         if (!el) {
             el = new StructuringElement();
         }
@@ -91,9 +91,9 @@ export class Morph {
             }
         }
 
-        this.data = result;
+        let data = [1,2,3,4,5];
 
-        return this;
+        return data;
     }
 
     public dilateWithElement = function (el) {
@@ -113,7 +113,7 @@ export class Morph {
 
         this.data = result;
 
-        return this;
+        return result;
     };
 
     public openingWithElement(el: StructuringElement): Morph {

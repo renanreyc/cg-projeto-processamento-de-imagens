@@ -22,6 +22,8 @@ export class PgmFile {
 
     public pixels: number[] = [];
 
+    public matrizpixels: number[][] = [];
+
     get length(): number {
         return this.pixels.length;
     }
@@ -61,7 +63,7 @@ export class PgmFile {
         // console.log("content")
         // console.log(content)
         const file = new PgmFile();
-        
+
         // CABEÇALHO
         const lines = content.split('\n');
 
@@ -83,6 +85,15 @@ export class PgmFile {
                 return a;
             });
             file.pixels.push(...pixels);
+
+        }
+
+        let flat = 0
+        for (let i = 0; i < Number(height); i++) {
+            file.matrizpixels[i] = [];
+            for (let j = 0; j < Number(width); j++) {
+                file.matrizpixels[i][j] = file.pixels[flat++]
+            }
         }
 
         return file;

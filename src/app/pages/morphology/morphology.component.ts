@@ -50,9 +50,8 @@ export class MorphologyComponent {
                 );
             } else if (this.selectedTransformation === MorphologyTypes.erosion) {
                 this.transformedImage = this.morphologyService.scale(
-                    this.image,
-                    this.x,
-                    this.y
+                    this.image
+
                 )
             } else if (this.selectedTransformation === MorphologyTypes.closure) {
                 this.transformedImage = this.morphologyService.shear(
@@ -62,9 +61,7 @@ export class MorphologyComponent {
                 )
             } else if (this.selectedTransformation === MorphologyTypes.opening) {
                 this.transformedImage = this.morphologyService.translation(
-                    this.image,
-                    this.x,
-                    this.y
+                    this.image
                 )
             }
 
