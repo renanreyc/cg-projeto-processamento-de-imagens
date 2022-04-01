@@ -8,6 +8,7 @@ import { AltoReforcoFilter } from '../../shared/services/filtros/alto-reforco.fi
 import { CanvasComponent } from '../../shared/components/canvas/canvas.component';
 import { GamaFilter } from 'src/app/shared/services/filtros/gama.filter';
 import { TransferenciaIntensidadeFilter } from 'src/app/shared/services/filtros/transferencia-intensidade.filter';
+import { TransferenciaLinearFilter } from 'src/app/shared/services/filtros/transferencia-linear.filter';
 import { MorphologyService } from 'src/app/shared/services/morphology.service';
 
 @Component({
@@ -27,6 +28,8 @@ export class FiltrationComponent {
     public fator: number = 1.2;
     public gama: number = 0.5;
     public largura: number = 100;
+    public linearA: number = 0.5;
+    public linearB: number = 10;
 
     constructor(private readonly filterService: FilterService) {
         this.filters = filterService.getAllFilters();
@@ -34,6 +37,7 @@ export class FiltrationComponent {
 
     public onFilterSelectChange(value: string): void {
         this.selectedFilter = Number(value);
+        console.log(this.selectedFilter)
     }
 
     public onFilterClick() {
@@ -59,6 +63,15 @@ export class FiltrationComponent {
                     this.image,
                     MascaraType.convolution,
                     { largura: this.largura }
+                );
+            } else if (this.selectedFilter === FilterTypes.TransferenciaLinear) {
+                console.log(this.linearA);
+                console.log(this.linearB);
+                
+                filteredImage = (filter as TransferenciaLinearFilter).transform(
+                    this.image,
+                    MascaraType.convolution,
+                    { a: this.linearA, b: this.linearB }
                 );
             } else {
                 filteredImage = filter.transform(

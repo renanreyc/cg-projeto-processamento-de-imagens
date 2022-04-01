@@ -32,13 +32,15 @@ export enum FilterTypes {
     Gama,
     Logaritmo,
     TransferenciaIntensidade,
-    TrasnferenciaFaixaDinamica,
     TransferenciaLinear
+    //TrasnferenciaFaixaDinamica
+    
 }
 
 export type AltoReforcoOptions = { fator: number };
 export type GamaOptions = { y: number };
 export type ConstA = { a: number};
 export type Largura = { largura: number};
+export type TransferenciaLinearOptions = {a: number, b: number};
 
 export type LogaritmoOptions = { a: number };

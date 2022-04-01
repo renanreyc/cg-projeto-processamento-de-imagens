@@ -52,12 +52,30 @@
 
             
             <span *ngIf="selectedFilter === 20" class="input-filter">
-                <label for="input-largura">Largura: </label>
+                <label for="input-largura">σ: </label>
                 <input
                     type="text"
                     name="input-largura"
                     id="input-largura"
                     [(ngModel)]="largura"
+                />
+            </span>
+
+            <span *ngIf="selectedFilter === 21" class="input-filter">
+                <label for="input-linear-a">a: </label>
+                <input
+                    type="text"
+                    name="input-linear-a"
+                    id="input-linear-a"
+                    [(ngModel)]="linearA"
+                />
+                <br>
+                <label for="input-linear-b">b: </label>
+                <input
+                    type="text"
+                    name="input-linear-b"
+                    id="input-linear-b"
+                    [(ngModel)]="linearB"
                 />
             </span>
         </div>

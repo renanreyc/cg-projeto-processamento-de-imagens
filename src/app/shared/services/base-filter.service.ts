@@ -2,16 +2,6 @@ import { Mascara, MascaraType } from '../types/maks';
 import { PgmFile } from '../types/pgm-image';
 import { ImageHelperService } from './image-helper.service';
 
-//             for (let j = 0; j < 9; j++) {
-//                 if(image.pixels[i] >= interpolacao){
-//                     newImage.push(255)
-//                 } else {
-//                     newImage.push(0)
-//                 }
-//                 // salvar no formato pgm
-//             }
-//             newImage.push(sum);
-
 export class BaseFilter {
     constructor(protected readonly imageHelperService: ImageHelperService) {}
 

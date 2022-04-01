@@ -21,7 +21,9 @@ import { RobertsYFilter } from './filtros/roberts-y.filter';
 import { SobelMagFilter } from './filtros/sobel-mag.filter';
 import { SobelXFilter } from './filtros/sobel-x.filter';
 import { SobelYFilter } from './filtros/sobel-y.filter';
+
 import { TransferenciaIntensidadeFilter } from './filtros/transferencia-intensidade.filter';
+import { TransferenciaLinearFilter } from './filtros/transferencia-linear.filter';
 
 @Injectable({ providedIn: 'root' })
 export class FilterService {
@@ -44,10 +46,13 @@ export class FilterService {
         private readonly sobelY: SobelYFilter,
         private readonly sobelMag: SobelMagFilter,
         private readonly altoReforco: AltoReforcoFilter,
+
         private readonly negativo: NegativoFilter,
         private readonly gama: GamaFilter,
         private readonly logaritmo: LogaritmoFilter,
+
         private readonly transferenciaIntensidade: TransferenciaIntensidadeFilter,
+        private readonly transferenciaLinear: TransferenciaLinearFilter
     ) {}
 
     public getAllFilters(): FilterTypeInfo[] {
@@ -72,7 +77,9 @@ export class FilterService {
             getFilterInfo(this.negativo),
             getFilterInfo(this.gama),
             getFilterInfo(this.logaritmo),
+            getFilterInfo(this.transferenciaLinear),
             getFilterInfo(this.transferenciaIntensidade),
+            
         ];
     }
 
@@ -120,6 +127,8 @@ export class FilterService {
                 return this.logaritmo;
             case FilterTypes.TransferenciaIntensidade:
                 return this.transferenciaIntensidade;
+            case FilterTypes.TransferenciaLinear:
+                return this.transferenciaLinear;
         }
     }
 }
